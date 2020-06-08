@@ -592,6 +592,7 @@ default_scheduler = Scheduler()
 #: Default :class:`Jobs <Job>` list
 jobs = default_scheduler.jobs  # todo: should this be a copy, e.g. jobs()?
 
+schedule.run_continuously = run_continuously
 
 def every(interval=1):
     """Calls :meth:`every <Scheduler.every>` on the
