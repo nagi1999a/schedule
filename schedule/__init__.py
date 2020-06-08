@@ -592,7 +592,18 @@ default_scheduler = Scheduler()
 #: Default :class:`Jobs <Job>` list
 jobs = default_scheduler.jobs  # todo: should this be a copy, e.g. jobs()?
 
-schedule.run_continuously = run_continuously
+def run_continuously(interval=1):
+    """Continuously run, while executing pending jobs at each elapsed
+    time interval.
+    @return cease_continuous_run: threading.Event which can be set to
+    cease continuous run.
+    Please note that it is *intended behavior that run_continuously()
+    does not run missed jobs*. For example, if you've registered a job
+    that should run every minute and you set a continuous run interval
+    of one hour then your job won't be run 60 times at each interval but
+    only once.
+    """
+    return default_scheduler.run_continuously(interval)
 
 def every(interval=1):
     """Calls :meth:`every <Scheduler.every>` on the
